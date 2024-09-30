@@ -1,0 +1,39 @@
+---
+- name: Deploy Laravel Application
+  hosts: all
+  become: yes
+  tasks:
+    - name: Установить необходимые пакеты
+      apt:
+        name:
+          - docker.io
+          - docker-compose
+        state: present
+      tags: [install]
+
+
+    - name: pull from git
+      git:
+        repo: https://github.com/laravel/laravel.git
+        dest: /var/www/test
+        update: yes
+        version: master
+
+    - name: Копировать docker-compose файл
+      copy:
+        src: ../docker-compose.yml
+        dest: /var/www/docker-compose.yml
+
+    - name: Копировать конфигурацию Nginx
+      copy:
+        src: ../nginx/default.conf
+        dest: /etc/nginx/conf.d/default.conf
+
+
+
+
+
+    - name: Запустить Docker Compose
+      command: docker-compose up -d
+      args:
+        chdir: /var/www/docker

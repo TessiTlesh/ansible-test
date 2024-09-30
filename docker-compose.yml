@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile
+    container_name: app
+    volumes:
+      - ./laravel:/var/www/html
+  web:
+    image: nginx:latest
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+      
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secretcd .
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+
