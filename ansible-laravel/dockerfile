@@ -19,9 +19,6 @@ WORKDIR /var/www/html
 # Копирование приложения в контейнер
 COPY . .
 
-# Установка зависимостей Laravel
-RUN composer install
-
 # Копирование файла .env и выполнение команды для генерации ключа приложения
 RUN cp .env.example .env && php artisan key:generate
 
