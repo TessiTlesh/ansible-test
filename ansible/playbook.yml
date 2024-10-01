@@ -3,11 +3,19 @@
   hosts: all
   become: yes
   tasks:
+    - name: Добавление PPA для PHP 8.2
+      apt_repository:
+        repo: ppa:ondrej/php
+        state: present
+
     - name: Установить необходимые пакеты
       apt:
         name:
           - docker.io
           - docker-compose
+          - composer
+          - php8.2
+          - unzip
         state: present
       tags: [install]
 
@@ -18,6 +26,12 @@
         dest: /var/www/test
         update: yes
         version: main
+
+    - name: Запустить composer install
+      command: composer install
+      args:
+        chdir: /var/www/test/ansible-laravel
+
 
     - name: Запустить Docker Compose
       command: docker-compose up -d
