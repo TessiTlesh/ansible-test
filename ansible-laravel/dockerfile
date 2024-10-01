@@ -28,11 +28,5 @@ RUN cp .env.example .env && php artisan key:generate
 # Разрешение на запись в определённые папки
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Создание ключа приложения
-CMD php artisan key:generate
-
-# Запус миграций
-CMD php artisan migrate
-
-# Запуск Laravel сервера
-CMD php artisan serve --host=0.0.0.0 --port=8000
+# Создание ключа приложения, Запус миграций и Запуск Laravel сервера
+CMD php artisan key:generate && php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000
