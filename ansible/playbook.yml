@@ -28,6 +28,11 @@
         update: yes
         version: main
 
+    - name: Создаем .env
+      command: cp .env.example .env
+      args:
+        chdir: /var/www/test/ansible-laravel
+
     - name: Запустить composer install
       command: composer install
       args:
