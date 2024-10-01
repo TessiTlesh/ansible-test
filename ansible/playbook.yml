@@ -16,6 +16,7 @@
           - composer
           - php8.2
           - unzip
+          - php8.2-xml
         state: present
       tags: [install]
 
