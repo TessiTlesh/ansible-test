@@ -20,6 +20,6 @@
         version: main
 
     - name: Запустить Docker Compose
-      command: docker-compose up -f ./docker-compose.yml -d
+      command: docker-compose up -d
       args:
         chdir: /var/www/test

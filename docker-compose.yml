@@ -11,6 +11,8 @@ services:
       - "8000:8000"  # Маппим порт Laravel сервера на хост
     depends_on:
       - db  # Указываем, что сервис зависит от базы данных
+    networks:
+      - laravel-network
   
   web:
     image: nginx:latest
@@ -22,6 +24,7 @@ services:
       - app  # Указываем зависимость от приложения
     networks:
       - laravel-network
+
   
   db:
     image: mysql:5.7
