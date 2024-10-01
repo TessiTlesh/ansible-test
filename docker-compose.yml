@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: ./ansible-laravel
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     container_name: app
     volumes:
       - ./ansible-laravel:/var/www/html
